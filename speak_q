@@ -1,0 +1,127 @@
+{
+ "metadata": {
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.2-final"
+  },
+  "orig_nbformat": 2,
+  "kernelspec": {
+   "name": "python3",
+   "display_name": "Python 3.8.2 64-bit",
+   "metadata": {
+    "interpreter": {
+     "hash": "20bf69066c0dd38d51965b69d5e1b6e387082e3198ba56e97997ac55f4e50ad0"
+    }
+   }
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2,
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import mac_say\n",
+    "import serial\n",
+    "import time\n",
+    "#The port will need to be adjusted to your arduino COM, can be found in the Arduino IDE -> Tools -> Port\n",
+    "ser = serial.Serial('/dev/cu.usbmodem101',9600)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def readFix():\n",
+    "        read = ser.readline()\n",
+    "        read = read.decode()\n",
+    "        read = read.rstrip()\n",
+    "        read = float(read)\n",
+    "        return read\n",
+    "        print(read)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def ardIn():\n",
+    "    user_input = input(\"\\n Choose side: (l/r/b/t) \")\n",
+    "    if user_input == \"l\":\n",
+    "        ser.write(b'l')\n",
+    "        length = readFix()\n",
+    "        mac_say.say(\"left side length equals\" + str(length))\n",
+    "        ardIn()\n",
+    "    elif user_input == \"r\":\n",
+    "        ser.write(b'r')\n",
+    "        length = readFix()\n",
+    "        mac_say.say(\"right side length equals\" + str(length))\n",
+    "        ardIn()\n",
+    "    elif user_input == \"t\":\n",
+    "        ser.write(b't')\n",
+    "        length = readFix()\n",
+    "        mac_say.say(\"top side length equals\" + str(length))\n",
+    "        ardIn()\n",
+    "    elif user_input == \"b\":\n",
+    "        ser.write(b'b')\n",
+    "        length = readFix()\n",
+    "        mac_say.say(\"bottom side length equals\" + str(length))\n",
+    "        ardIn()\n",
+    "    elif user_input == \"1\":\n",
+    "        ser.write(b'1')\n",
+    "        length = readFix()\n",
+    "        mac_say.say(\"top left angle equals\" + str(length))\n",
+    "        ardIn()\n",
+    "    elif user_input == \"2\":\n",
+    "        ser.write(b'2')\n",
+    "        length = readFix()\n",
+    "        mac_say.say(\"bottom right angle equals\" + str(length))\n",
+    "        ardIn()\n",
+    "    elif user_input == \"3\":\n",
+    "        ser.write(b'3')\n",
+    "        length = readFix()\n",
+    "        mac_say.say(\"top right angle equals\" + str(length))\n",
+    "        ardIn()\n",
+    "    elif user_input == \"4\":\n",
+    "        ser.write(b'4')\n",
+    "        length = readFix()\n",
+    "        mac_say.say(\"bottom left angle equals\" + str(length))\n",
+    "        ardIn()\n",
+    "\n",
+    "    elif user_input ==\"quit\" or user_input == \"q\":\n",
+    "        print(\"Program Exiting\")\n",
+    "        time.sleep(0.1)\n",
+    "        ser.write(b'L')\n",
+    "        ser.close()\n",
+    "    else:\n",
+    "        print(\"eat poop\")\n",
+    "        ardIn()\n",
+    "\n",
+    "time.sleep(0.5)\n",
+    "ardIn()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ]
+}

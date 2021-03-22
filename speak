@@ -1,0 +1,153 @@
+{
+ "metadata": {
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.2-final"
+  },
+  "orig_nbformat": 2,
+  "kernelspec": {
+   "name": "python3",
+   "display_name": "Python 3.8.2 64-bit",
+   "metadata": {
+    "interpreter": {
+     "hash": "20bf69066c0dd38d51965b69d5e1b6e387082e3198ba56e97997ac55f4e50ad0"
+    }
+   }
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2,
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import mac_say\n",
+    "import serial\n",
+    "import time\n",
+    "#The port will need to be adjusted to your arduino COM, can be found in the Arduino IDE -> Tools -> Port\n",
+    "ser = serial.Serial('/dev/cu.usbmodem101',9600)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def readFix():\n",
+    "        read = ser.readline()\n",
+    "        read = read.decode()\n",
+    "        read = read.rstrip()\n",
+    "        read = float(read)\n",
+    "        return read\n",
+    "        print(read)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "error",
+     "ename": "KeyboardInterrupt",
+     "evalue": "Interrupted by user",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mKeyboardInterrupt\u001b[0m                         Traceback (most recent call last)",
+      "\u001b[0;32m<ipython-input-3-5326f223e149>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m\u001b[0m\n\u001b[1;32m     52\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     53\u001b[0m \u001b[0mtime\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msleep\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;36m0.5\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 54\u001b[0;31m \u001b[0mardIn\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+      "\u001b[0;32m<ipython-input-3-5326f223e149>\u001b[0m in \u001b[0;36mardIn\u001b[0;34m()\u001b[0m\n\u001b[1;32m      5\u001b[0m         \u001b[0mlength\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mreadFix\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      6\u001b[0m         \u001b[0mmac_say\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msay\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"left side length equals\"\u001b[0m \u001b[0;34m+\u001b[0m \u001b[0mstr\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mlength\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 7\u001b[0;31m         \u001b[0mardIn\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      8\u001b[0m     \u001b[0;32melif\u001b[0m \u001b[0muser_input\u001b[0m \u001b[0;34m==\u001b[0m \u001b[0;34m\"r\"\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      9\u001b[0m         \u001b[0mser\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mwrite\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34mb'r'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m<ipython-input-3-5326f223e149>\u001b[0m in \u001b[0;36mardIn\u001b[0;34m()\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[0;32mdef\u001b[0m \u001b[0mardIn\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 2\u001b[0;31m     \u001b[0muser_input\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0minput\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"\\n Choose side: (l/r/b/t) \"\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      3\u001b[0m     \u001b[0;32mif\u001b[0m \u001b[0muser_input\u001b[0m \u001b[0;34m==\u001b[0m \u001b[0;34m\"l\"\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      4\u001b[0m         \u001b[0mser\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mwrite\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34mb'l'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m         \u001b[0mlength\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mreadFix\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m~/Library/Python/3.8/lib/python/site-packages/ipykernel/kernelbase.py\u001b[0m in \u001b[0;36mraw_input\u001b[0;34m(self, prompt)\u001b[0m\n\u001b[1;32m    846\u001b[0m                 \u001b[0;34m\"raw_input was called, but this frontend does not support input requests.\"\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    847\u001b[0m             )\n\u001b[0;32m--> 848\u001b[0;31m         return self._input_request(str(prompt),\n\u001b[0m\u001b[1;32m    849\u001b[0m             \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_parent_ident\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    850\u001b[0m             \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_parent_header\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m~/Library/Python/3.8/lib/python/site-packages/ipykernel/kernelbase.py\u001b[0m in \u001b[0;36m_input_request\u001b[0;34m(self, prompt, ident, parent, password)\u001b[0m\n\u001b[1;32m    890\u001b[0m             \u001b[0;32mexcept\u001b[0m \u001b[0mKeyboardInterrupt\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    891\u001b[0m                 \u001b[0;31m# re-raise KeyboardInterrupt, to truncate traceback\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 892\u001b[0;31m                 \u001b[0;32mraise\u001b[0m \u001b[0mKeyboardInterrupt\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"Interrupted by user\"\u001b[0m\u001b[0;34m)\u001b[0m \u001b[0;32mfrom\u001b[0m \u001b[0;32mNone\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    893\u001b[0m             \u001b[0;32mexcept\u001b[0m \u001b[0mException\u001b[0m \u001b[0;32mas\u001b[0m \u001b[0me\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    894\u001b[0m                 \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mlog\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mwarning\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"Invalid Message:\"\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mexc_info\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mTrue\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;31mKeyboardInterrupt\u001b[0m: Interrupted by user"
+     ]
+    }
+   ],
+   "source": [
+    "def ardIn():\n",
+    "    user_input = input(\"\\n Choose side: (l/r/b/t) \")\n",
+    "    if user_input == \"l\":\n",
+    "        ser.write(b'l')\n",
+    "        length = readFix()\n",
+    "        mac_say.say(\"left side length equals\" + str(length))\n",
+    "        ardIn()\n",
+    "    elif user_input == \"r\":\n",
+    "        ser.write(b'r')\n",
+    "        length = readFix()\n",
+    "        mac_say.say(\"right side length equals\" + str(length))\n",
+    "        ardIn()\n",
+    "    elif user_input == \"t\":\n",
+    "        ser.write(b't')\n",
+    "        length = readFix()\n",
+    "        mac_say.say(\"top side length equals\" + str(length))\n",
+    "        ardIn()\n",
+    "    elif user_input == \"b\":\n",
+    "        ser.write(b'b')\n",
+    "        length = readFix()\n",
+    "        mac_say.say(\"bottom side length equals\" + str(length))\n",
+    "        ardIn()\n",
+    "    elif user_input == \"1\":\n",
+    "        ser.write(b'1')\n",
+    "        length = readFix()\n",
+    "        mac_say.say(\"bottom right angle equals\" + str(length))\n",
+    "        ardIn()\n",
+    "    elif user_input == \"2\":\n",
+    "        ser.write(b'2')\n",
+    "        length = readFix()\n",
+    "        mac_say.say(\"top left angle equals\" + str(length))\n",
+    "        ardIn()\n",
+    "    elif user_input == \"3\":\n",
+    "        ser.write(b'3')\n",
+    "        length = readFix()\n",
+    "        mac_say.say(\"bottom left angle equals\" + str(length))\n",
+    "        ardIn()\n",
+    "    elif user_input == \"4\":\n",
+    "        ser.write(b'4')\n",
+    "        length = readFix()\n",
+    "        mac_say.say(\"top right angle equals\" + str(length))\n",
+    "        ardIn()\n",
+    "\n",
+    "    elif user_input ==\"quit\" or user_input == \"q\":\n",
+    "        print(\"Program Exiting\")\n",
+    "        time.sleep(0.1)\n",
+    "        ser.write(b'L')\n",
+    "        ser.close()\n",
+    "    else:\n",
+    "        print(\"eat poop\")\n",
+    "        ardIn()\n",
+    "\n",
+    "time.sleep(0.5)\n",
+    "ardIn()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x = 7\n",
+    "mac_say.say(str(x) + \"Big Poops\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ]
+}
